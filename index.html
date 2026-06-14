@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Keterangan</title>
+    <!-- Favicon dari file lokal yang kamu impor ke Spck Editor -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <!-- Menggunakan html2canvas untuk konversi HTML ke Gambar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Header Aplikasi bertema Pelangi -->
+        <header class="rainbow-border">
+            <h1>Surat Keterangan</h1>
+            <p class="watermark">by Daus XD</p>
+        </header>
+
+        <div class="main-content">
+            <!-- PANEL INPUT FORM -->
+            <div class="form-panel">
+                <h3><i class="icon">📝</i> Isi Data Surat</h3>
+                
+                <div class="input-group">
+                    <label>Unggah Logo (Opsional):</label>
+                    <input type="file" id="logoInput" accept="image/*">
+                    <div id="logoPreviewContainer" class="hidden">
+                        <img id="logoMiniPreview" src="" alt="Mini Logo">
+                        <button type="button" id="btnRemoveLogo" title="Hapus Logo">&times;</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Nama Lengkap:</label>
+                    <input type="text" id="inNama" placeholder="Masukkan nama lengkap">
+                </div>
+
+                <div class="geo-inputs">
+                    <label>Alamat Lengkap:</label>
+                    <input type="text" id="inDusun" placeholder="Dusun">
+                    <input type="text" id="inDesa" placeholder="Desa">
+                    <input type="text" id="inKecamatan" placeholder="Kecamatan">
+                    <input type="text" id="inKabupaten" placeholder="Kabupaten">
+                    <input type="text" id="inProvinsi" placeholder="Provinsi">
+                </div>
+
+                <div class="input-group">
+                    <label>Salam Pembuka:</label>
+                    <input type="text" id="inSalamPembuka" value="Dengan hormat,">
+                </div>
+
+                <div class="input-group">
+                    <label>Pembukaan:</label>
+                    <textarea id="inPembukaan" rows="2" placeholder="Kalimat pembuka surat..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Pesan / Isi Surat:</label>
+                    <textarea id="inPesan" rows="4" placeholder="Isi pokok surat keterangan..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Penutupan:</label>
+                    <textarea id="inPenutupan" rows="2" placeholder="Kalimat penutup surat..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Salam Penutup:</label>
+                    <input type="text" id="inSalamPenutup" value="Hormat kami,">
+                </div>
+
+                <!-- Area Tanda Tangan Digital (Coret-coret) -->
+                <div class="input-group">
+                    <label>Goreskan Tanda Tangan Kamu di Bawah:</label>
+                    <div class="canvas-container">
+                        <canvas id="signaturePad" width="300" height="150"></canvas>
+                        <button type="button" id="btnClearSig">Hapus Ttd</button>
+                    </div>
+                </div>
+
+                <button type="button" id="btnAksi" class="btn-primary rainbow-bg">Proses Surat</button>
+            </div>
+
+            <!-- PANEL REAL-TIME PREVIEW SURAT -->
+            <div class="preview-panel">
+                <h3><i class="icon">👁️</i> Live Preview (Kertas Surat Putih)</h3>
+                
+                <!-- Elemen Surat yang Akan Di-render/Dicetak -->
+                <div id="suratKertas" class="surat-kertas">
+                    
+                    <!-- Sesuai request: Detail Alamat di bawah judul di atas pembatas, berukuran kecil -->
+                    <div class="header-surat">
+                        <div class="logo-surat-area">
+                            <img id="suratLogo" src="" alt="" class="hidden">
+                        </div>
+                        <div class="judul-area">
+                            <h2 class="judul-surat">SURAT KETERANGAN</h2>
+                            <div id="suratAlamatKecil" class="alamat-kecil">
+                                Dusun [Dusun], Desa [Desa], Kec. [Kecamatan], Kab. [Kabupaten], Provinsi [Provinsi]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pembatas Surat -->
+                    <div class="pembatas-surat"></div>
+
+                    <!-- Isi Surat -->
+                    <div class="isi-surat-container">
+                        <p id="suratSalamPembuka" class="salam-pembuka">Dengan hormat,</p>
+                        <p id="suratPembukaan" class="text-justified">[Kalimat Pembukaan]</p>
+                        
+                        <!-- Detail Data Diri -->
+                        <table class="tabel-biodata">
+                            <tr>
+                                <td style="width: 30%;">Nama Lengkap</td>
+                                <td style="width: 3%;">:</td>
+                                <td id="suratNama" style="font-weight: bold;">[Nama Lengkap]</td>
+                            </tr>
+                        </table>
+
+                        <p id="suratPesan" class="text-justified">[Isi Pesan Surat Keterangan]</p>
+                        <p id="suratPenutupan" class="text-justified">[Kalimat Penutupan]</p>
+                    </div>
+
+                    <!-- Area Tanda Tangan di Kertas -->
+                    <div class="footer-surat">
+                        <div class="ttd-box">
+                            <p id="suratSalamPenutup">Hormat kami,</p>
+                            <div class="space-ttd">
+                                <img id="suratTtdImg" src="" alt="Tanda tangan" class="hidden">
+                            </div>
+                            <p class="nama-penandatangan" id="suratNamaBawah">( [Nama Lengkap] )</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POP-UP KHUSUS (DOWNLOAD & CETAK) -->
+    <div id="actionModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" id="btnCloseModal">&times;</span>
+            <h3>Opsi Surat Keterangan</h3>
+            <p>Silakan pilih tindakan yang ingin kamu lakukan pada surat ini:</p>
+            
+            <!-- Hasil Image Tersembunyi/Terproteksi di dalam Pop-up -->
+            <div id="hiddenImageContainer" class="no-select"></div>
+
+            <div class="modal-buttons">
+                <button id="btnDownloadImg" class="btn-modal download-btn">💾 Download Gambar (.png)</button>
+                <button id="btnCetakSurat" class="btn-modal print-btn">🖨️ Cetak Surat (Print HP)</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

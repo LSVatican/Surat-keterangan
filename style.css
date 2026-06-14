@@ -1,0 +1,355 @@
+/* Reset & Base Styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f0f15;
+    color: #e0e0e0;
+    padding: 20px;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Animasi Pelangi (Rainbow Gradient Effect) */
+@keyframes rainbowAnimation {
+    0% { border-color: #ff0055; box-shadow: 0 0 10px #ff0055; }
+    25% { border-color: #00ffcc; box-shadow: 0 0 10px #00ffcc; }
+    50% { border-color: #9900ff; box-shadow: 0 0 10px #9900ff; }
+    75% { border-color: #ccff00; box-shadow: 0 0 10px #ccff00; }
+    100% { border-color: #ff0055; box-shadow: 0 0 10px #ff0055; }
+}
+
+header {
+    text-align: center;
+    padding: 15px;
+    background: #151522;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    animation: rainbowAnimation 6s linear infinite;
+}
+
+header h1 {
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255,255,255,0.3);
+}
+
+.watermark {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 5px;
+}
+
+/* Layout Grid Utama */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+@media (max-width: 900px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Panel Form */
+.form-panel, .preview-panel {
+    background: #151522;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #252535;
+}
+
+h3 {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #252535;
+    padding-bottom: 8px;
+    color: #00ffcc;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #aaa;
+}
+
+input[type="text"], textarea, input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    background: #1c1c2e;
+    border: 1px solid #3a3a52;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #00ffcc;
+}
+
+/* Mini Preview Logo & Fitur Close */
+#logoPreviewContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    background: #202035;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+    position: relative;
+}
+
+#logoMiniPreview {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+#btnRemoveLogo {
+    background: #ff3366;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    cursor: pointer;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    line-height: 16px;
+    text-align: center;
+}
+
+.geo-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 15px;
+    background: #1a1a2a;
+    padding: 10px;
+    border-radius: 5px;
+}
+.geo-inputs label { grid-column: span 2; }
+
+/* Tanda Tangan Canvas */
+.canvas-container {
+    background: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+#signaturePad {
+    border: 1px dashed #ccc;
+    background: #fafafa;
+    cursor: crosshair;
+    width: 100%;
+    max-width: 300px;
+}
+#btnClearSig {
+    display: block;
+    margin: 5px auto 0 auto;
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* Tombol Pelangi */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s;
+}
+.rainbow-bg {
+    background: linear-gradient(45deg, #ff0055, #9900ff, #00ffcc, #ccff00);
+    background-size: 300% 300%;
+    animation: rainbowGradient 4s ease infinite;
+}
+@keyframes rainbowGradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+.btn-primary:active { transform: scale(0.98); }
+
+/* --- GAYA STRUKTUR KERTAS SURAT (MUTLAK PUTIH) --- */
+.surat-kertas {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 30px;
+    min-height: 500px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border-radius: 2px;
+    font-family: 'Times New Roman', Times, serif; /* Font resmi kertas surat */
+}
+
+.header-surat {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.logo-surat-area img {
+    max-height: 65px;
+    max-width: 65px;
+    object-fit: contain;
+}
+
+.judul-area {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.judul-surat {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Letak alamat di bawah judul di atas pembatas berukuran kecil */
+.alamat-kecil {
+    font-size: 10px;
+    color: #333;
+    margin-top: 2px;
+    font-style: italic;
+    line-height: 1.2;
+}
+
+.pembatas-surat {
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #000;
+    height: 3px;
+    margin-bottom: 20px;
+}
+
+.isi-surat-container {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.salam-pembuka { margin-bottom: 10px; }
+.text-justified { text-align: justify; margin-bottom: 12px; text-indent: 30px; }
+
+.tabel-biodata {
+    width: 100%;
+    margin: 15px 0 15px 30px;
+    font-size: 13px;
+}
+.tabel-biodata td { padding: 3px 0; }
+
+.footer-surat {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ttd-box {
+    text-align: center;
+    width: 200px;
+    font-size: 13px;
+}
+
+.space-ttd {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.space-ttd img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.nama-penandatangan {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* --- POP-UP MODAL & BLOKIR PROTEKSI --- */
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: #151525;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    border: 2px solid #00ffcc;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 28px; color: #fff; cursor: pointer;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn-modal {
+    padding: 12px; border: none; border-radius: 5px;
+    font-size: 15px; font-weight: bold; cursor: pointer;
+}
+
+.download-btn { background: #00ffcc; color: #000; }
+.print-btn { background: #9900ff; color: #fff; }
+
+/* Proteksi agar user tidak curang klik kanan / tahan gambar */
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none; /* Mematikan interaksi pointer langsung pada elemen gambar hasil render di dalam pop-up */
+}
+
+.hidden { display: none !important; }
